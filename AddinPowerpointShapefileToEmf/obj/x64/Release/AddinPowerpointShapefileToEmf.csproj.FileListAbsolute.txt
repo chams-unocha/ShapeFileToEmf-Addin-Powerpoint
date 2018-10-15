@@ -1,0 +1,15 @@
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\AddinPowerpointShapefileToEmf.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\AddinPowerpointShapefileToEmf.pdb
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\AddinPowerpointShapefileToEmf.dll.manifest
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\AddinPowerpointShapefileToEmf.vsto
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\Microsoft.Office.Tools.Common.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\Microsoft.Office.Tools.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\Microsoft.Office.Tools.v4.0.Framework.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\x64\Release\Microsoft.VisualStudio.Tools.Applications.Runtime.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\x64\Release\AddinPowerpointShapefileToEmf.AutoEmfRbbon.resources
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\x64\Release\AddinPowerpointShapefileToEmf.Properties.Resources.resources
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\x64\Release\AddinPowerpointShapefileToEmf.SettingForm.resources
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\x64\Release\AddinPowerpointShapefileToEmf.csproj.GenerateResource.Cache
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\x64\Release\AddinPowerpointShapefileToEmf.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\x64\Release\AddinPowerpointShapefileToEmf.pdb

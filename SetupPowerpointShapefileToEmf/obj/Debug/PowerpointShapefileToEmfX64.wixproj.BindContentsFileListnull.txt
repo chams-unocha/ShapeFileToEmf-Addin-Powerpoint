@@ -1,0 +1,5 @@
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\AddinPowerpointShapefileToEmf.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\AddinPowerpointShapefileToEmf.dll.manifest
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\Microsoft.Office.tools.dll
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\AddinPowerpointShapefileToEmf.vsto

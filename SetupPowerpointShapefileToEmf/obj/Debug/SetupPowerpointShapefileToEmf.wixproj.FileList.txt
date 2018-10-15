@@ -1,0 +1,7 @@
+obj\Debug\Product.wixobj
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\SetupPowerpointShapefileToEmf\bin\Debug\cab1.cab
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\SetupPowerpointShapefileToEmf\bin\Debug\SetupPowerpointShapefileToEmf.msi
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\SetupPowerpointShapefileToEmf\bin\Debug\SetupPowerpointShapefileToEmf.wixpdb
+obj\Debug\SetupPowerpointShapefileToEmf.wixproj.BindContentsFileListnull.txt
+obj\Debug\SetupPowerpointShapefileToEmf.wixproj.BindOutputsFileListnull.txt
+obj\Debug\SetupPowerpointShapefileToEmf.wixproj.BindBuiltOutputsFileListnull.txt

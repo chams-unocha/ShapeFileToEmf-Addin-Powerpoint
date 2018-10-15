@@ -1,0 +1,3 @@
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\SetupPowerpointShapefileToEmf\bin\Debug\cab1.cab
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\SetupPowerpointShapefileToEmf\bin\Debug\SetupPowerpointShapefileToEmf.msi
+C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\SetupPowerpointShapefileToEmf\bin\Debug\SetupPowerpointShapefileToEmf.wixpdb

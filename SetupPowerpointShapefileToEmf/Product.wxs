@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Powerpoint Shapefile To Emf X64" Language="1033" Version="1.0.0.0" Manufacturer="OCHA ROWCA" UpgradeCode="46328a38-961e-4cb1-9a17-b286c57bc1e5">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="SetupPowerpointShapefileToEmf" Level="1">
+			<!--ComponentGroupRef Id="ProductComponents" /-->
+      <ComponentRef Id="CMP_AddIn" />
+      <ComponentRef Id="CMP_Manifest" />
+      <ComponentRef Id="CMP_Vsto" />
+      <ComponentRef Id="CMP_ToolsCommon" />
+      <ComponentRef Id="CMP_ToolsPowerPoint" />
+		</Feature>
+  
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SetupPowerpointShapefileToEmf">
+          <Component Id="CMP_AddIn">
+            <File Id="FILE_AddIn"
+            Source="$(var.AddinPowerpointShapefileToEmf.TargetPath)"
+            KeyPath="yes" />
+          </Component>
+
+          
+          <Component Id="CMP_Manifest">
+            <File Id="FILE_Manifest"
+            Source="$(var.AddinPowerpointShapefileToEmf.TargetPath).manifest"
+            KeyPath="yes" />
+          </Component>
+
+          <Component Id="CMP_Vsto">
+            <File Id="FILE_Vsto" Source="$(var.AddinPowerpointShapefileToEmf.TargetDir)AddinPowerpointShapefileToEmf.vsto" KeyPath="yes" />
+          <RegistryKey Root="HKLM" Key="SOFTWARE\Wow6432Node\Microsoft\Office\Outlook\Addins\AddinPowerpointShapefileToEmf ">
+            <RegistryValue Name="Description"
+                           Value="OCHA ShapeFile to EMF"
+                           Type="string"
+                           Action="write" />
+            <RegistryValue Name="PowerpointShapefileToEmf"
+                           Value="AddinPowerpointShapefileToEmf"
+                           Type="string"
+                           Action="write" />
+          </RegistryKey>
+          </Component>
+          
+          
+
+          <Component Id="CMP_ToolsCommon">
+            <File Id="FILE_ToolsCommon"
+            Source="$(var.AddinPowerpointShapefileToEmf.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" KeyPath="yes" />
+          </Component>
+
+          <Component Id="CMP_ToolsPowerPoint">
+            <File Id="FILE_ToolsOutlook" Source="$(var.AddinPowerpointShapefileToEmf.TargetDir)Microsoft.Office.tools.dll" KeyPath="yes" />
+          </Component>
+        
+        </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+</Wix>
