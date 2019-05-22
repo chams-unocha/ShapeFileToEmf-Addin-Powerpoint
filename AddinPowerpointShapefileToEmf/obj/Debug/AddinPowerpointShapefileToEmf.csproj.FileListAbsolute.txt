@@ -14,5 +14,3 @@ c:\users\chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToE
 c:\users\chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\Debug\AddinPowerpointShapefileToEmf.pdb
 c:\users\chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\Debug\AddinPowerpointShapefileToEmf.AutoEmfRbbon.resources
 c:\users\chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\obj\Debug\AddinPowerpointShapefileToEmf.SettingForm.resources
-C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\RestSharp.dll
-C:\Users\Chams\documents\visual studio 2015\Projects\AddinPowerpointShapefileToEmf\AddinPowerpointShapefileToEmf\bin\Debug\RestSharp.xml

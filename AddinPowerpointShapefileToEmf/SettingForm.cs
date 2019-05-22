@@ -11,7 +11,6 @@ using System.IO;
 using Microsoft.Office.Interop.PowerPoint;
 using System.Net;
 using System.Collections.Specialized;
-using RestSharp;
 
 namespace AddinPowerpointShapefileToEmf
 {
@@ -102,39 +101,52 @@ namespace AddinPowerpointShapefileToEmf
                         string[] polygons = shapeInfo[1].Split('_');
                         for (int i = 0; i < polygons.Length; i++)
                         {
-                            string[] coordinates = polygons[i].Split(',');
-                            if (coordinates.Length>1)
+                            if (polygons[i]!="")
                             {
-                                Single[,] points = new Single[(coordinates.Length - 1) / 2, 2];
-                                int x = 0;
-                                int y = 0;
-                                for (int j = 0; j < coordinates.Length - 1; j++)
+                                string[] coordinates = polygons[i].Split(',');
+                                if (coordinates.Length > 1)
                                 {
-                                    float val = (float)Convert.ToDouble(coordinates[j].Replace('.', ','));
-                                    int zoom = 2;
-                                    if (y == 0)
+                                   //Double[,] points = new Double[(coordinates.Length - 1) / 2, 2];
+                                    Single[,] points = new Single[(coordinates.Length - 1) / 2, 2];
+                                    int x = 0;
+                                    int y = 0;
+                                    for (int j = 0; j < coordinates.Length - 1; j++)
                                     {
-                                        
-                                        points[x, y] = (val);
-                                    }
-                                    if (y == 1)
-                                    {
-                                        points[x, y] = (val);
+                                        /*
+                                        if (j==10)
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {*/
+                                            float val = (float)Convert.ToDouble(coordinates[j].Replace('.', ','));
+
+                                            if (y == 0)
+                                            {
+
+                                                points[x, y] = (val);
+                                            }
+                                            if (y == 1)
+                                            {
+                                                points[x, y] = (val);
+                                            }
+
+                                            y++;
+                                            if (y == 2)
+                                            {
+                                                y = 0;
+                                                x++;
+                                            }
+                                        //}
                                     }
 
-                                    y++;
-                                    if (y == 2)
-                                    {
-                                        y = 0;
-                                        x++;
-                                    }
+                                    object po = points;
+
+                                    maSlide.Shapes.AddPolyline(po).Name = shapeName;
+                                    listNames.Add(shapeName);
                                 }
-
-                                object po = points;
-
-                                maSlide.Shapes.AddPolyline(po).Name = shapeName;
-                                listNames.Add(shapeName);
                             }
+                            
                             
                         }
                     }
@@ -193,20 +205,7 @@ namespace AddinPowerpointShapefileToEmf
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var client = new RestClient("https://ogre.adc4gis.com/convert");
-            // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
-            var request = new RestRequest(Method.POST);
-
-            request.AddHeader("Content-Type", "multipart/mixed");
-
-            // add files to upload (works with compatible verbs)
-            request.AddFile("file", @"C:\test.zip");
-
-            // execute the request
-            client.ExecuteAsync(request, response => {
-                Console.WriteLine(response);
-            });
         }
 
         private void label1_Click(object sender, EventArgs e)
