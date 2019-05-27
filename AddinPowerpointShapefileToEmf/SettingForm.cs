@@ -59,77 +59,89 @@ namespace AddinPowerpointShapefileToEmf
 
                         if (listShapes.Count != 0)
                         {
-                            buttonCreate.Enabled = true;
-                            MessageBox.Show(listShapes.Count + " shapes are detected in the file");
+                            //buttonCreate.Enabled = true;
+                            CreateShapes();
+                            //MessageBox.Show(listShapes.Count + " shapes are detected in the file");
                         }
                         else
                         {
-                            buttonCreate.Enabled = false;
+                            MessageBox.Show("No shape detected in the file, please verify the file or contact the support");
                         }
                     }
                     else
                     {
                         MessageBox.Show("Please select a txt file converted on the web application, the name should be (ShapeFileTo.Emf ...)");
-                        buttonCreate.Enabled = false;
+                        //buttonCreate.Enabled = false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error has occured close and try again or take a screenshot and send to mane2@un.org : "+ex.Message);
-                buttonCreate.Enabled = false;
+               // buttonCreate.Enabled = false;
             }
         }
 
-        private void buttonCreate_Click(object sender, EventArgs e)
+        private void CreateShapes()
         {
-            if (listShapes.Count != 0)
-            {
-                Slides listSlide = Globals.ThisAddIn.Application.ActivePresentation.Slides;
-                
-                foreach (Slide maSlide in listSlide)
-                {
-                    ShapeRange srd = maSlide.Shapes.Range();
-                    srd.Delete();
 
-                    List<object> listNames = new List<object>();
-                    int c = 0;
-                    foreach (string shapefile in listShapes)
+            
+
+            
+
+
+            int lastPoint = 0;
+
+            try
+            {
+                WriteLog("emf", "Start");
+                if (listShapes.Count != 0)
+                {
+                    WriteLog("emf", " - nb shapes : " + listShapes.Count);
+                    Slides listSlide = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+                    
+                    foreach (Slide maSlide in listSlide)
                     {
-                        string[] shapeInfo = shapefile.Split('*');
-                        string shapeName = shapeInfo[0];
-                        string[] polygons = shapeInfo[1].Split('_');
-                        for (int i = 0; i < polygons.Length; i++)
+                        
+
+                        ShapeRange srd = maSlide.Shapes.Range();
+                        srd.Delete();
+                        WriteLog("emf", " - all existing slides deleted");
+
+                        List<object> listNames = new List<object>();
+                        int c = 0;
+                        foreach (string shapefile in listShapes)
                         {
-                            if (polygons[i]!="")
+                            string[] shapeInfo = shapefile.Split('*');
+                            string shapeName = shapeInfo[0];
+                            string[] polygons = shapeInfo[1].Split('_');
+
+                            WriteLog("emf", " - Working on shape : " + shapeName + " - " + polygons.Length + " polygones");
+
+                            for (int i = 0; i < polygons.Length; i++)
                             {
-                                string[] coordinates = polygons[i].Split(',');
-                                if (coordinates.Length > 1)
+                                if (polygons[i] != "")
                                 {
-                                   //Double[,] points = new Double[(coordinates.Length - 1) / 2, 2];
-                                    Single[,] points = new Single[(coordinates.Length - 1) / 2, 2];
-                                    int x = 0;
-                                    int y = 0;
-                                    for (int j = 0; j < coordinates.Length - 1; j++)
+                                    string[] coordinates = polygons[i].Split(',');
+                                    if (coordinates.Length > 1)
                                     {
                                         /*
-                                        if (j==10)
+                                        
+                                        
+                                        for (int j = 0; j < (coordinates.Length - 1); j++)
                                         {
-                                            break;
-                                        }
-                                        else
-                                        {*/
                                             float val = (float)Convert.ToDouble(coordinates[j].Replace('.', ','));
 
                                             if (y == 0)
                                             {
-
+                                                
                                                 points[x, y] = (val);
                                             }
                                             if (y == 1)
                                             {
                                                 points[x, y] = (val);
                                             }
+                                            x2 = x;
 
                                             y++;
                                             if (y == 2)
@@ -137,71 +149,166 @@ namespace AddinPowerpointShapefileToEmf
                                                 y = 0;
                                                 x++;
                                             }
-                                        //}
+
+                                            lastPoint++;
+                                        }
+                                        
+                                        */
+
+                                        //Single[,] myPoints = new Single[5, 2]; // {500,50,505,55,510,60,515,65,520,70};
+                                        int nbPoints = (coordinates.Length - 1) / 2;
+                                        WriteLog("emf", "    " + nbPoints + " points to create");
+                                        Single[,] points = new Single[nbPoints, 2];                                       
+                                        int x = 0;
+                                        int y = 0;
+                                        int x2 = 0;
+
+                                        for (int j = 0; j < (coordinates.Length - 1); j++)
+                                        {
+                                            double val = double.Parse(coordinates[j], System.Globalization.CultureInfo.InvariantCulture);
+
+                                            if (y == 0)
+                                            {
+                                                points[x, y] = (float)val;
+                                            }
+                                            if (y == 1)
+                                            {
+                                                points[x, y] = (float)val;
+                                            }
+                                            x2 = x;
+
+                                            y++;
+                                            if (y == 2)
+                                            {
+                                                y = 0;
+                                                x++;
+                                            }
+
+                                            lastPoint++;
+                                        }
+
+                                   
+
+                                        object po = points;
+                                       // WriteLog("emf", "    Shape " + shapeName + " ready to be drawed with " + ((lastPoint) / 2) + "/" + nbPoints + " points, x=" + x + " , y=" + y + ", x2=" + x2);
+                                        lastPoint = 0;
+                                        maSlide.Shapes.AddPolyline(po).Name = shapeName;
+                                        WriteLog("emf", "    Shape " + shapeName + " drawed");
+                                        listNames.Add(shapeName);
+
                                     }
-
-                                    object po = points;
-
-                                    maSlide.Shapes.AddPolyline(po).Name = shapeName;
-                                    listNames.Add(shapeName);
                                 }
                             }
-                            
-                            
                         }
+
+                        object[] arrayNames = new object[listNames.Count];
+
+                        foreach (object name in listNames)
+                        {
+                            arrayNames[c] = name;
+                            c++;
+                        }
+                        ShapeRange sr = maSlide.Shapes.Range();
+
+                        WriteLog("emf", " - group all shapes");
+                        sr.Group().Name = "MonGoupe";
+                        sr.Flip(Microsoft.Office.Core.MsoFlipCmd.msoFlipVertical);
+                        
+
+                        WriteLog("emf", " - prepare to resize the shapes");
+                        float longeur = sr.Width;
+                        float hauteur = sr.Height;
+
+                        int maxWidth = 1280;
+                        int maxHeight = 500;
+
+                        float coef = 0;
+
+                        if (longeur < hauteur)
+                        {
+                            c = maxWidth / Convert.ToInt32(longeur);
+                            longeur = longeur * c;
+                            hauteur = hauteur * c;
+                        }
+                        else
+                        {
+                            c = maxHeight / Convert.ToInt32(hauteur);
+                            longeur = longeur * c;
+                            hauteur = hauteur * c;
+                        }
+
+                        sr.Width = longeur;
+                        sr.Height = hauteur;
+                        WriteLog("emf", " - Shapes reseized");
+                        WriteLog("emf", " - Process End");
+                        WriteLog("emf", " - ");
+                        WriteLog("emf", " - ");
+                        
                     }
 
-                    object[] arrayNames = new object[listNames.Count];
-                    
-                    foreach (object name in listNames)
-                    {
-                        arrayNames[c] = name;
-                        c++;
-                    }
-                    ShapeRange sr = maSlide.Shapes.Range();
-                    
-                    sr.Group().Name ="MonGoupe";
-                    sr.Flip(Microsoft.Office.Core.MsoFlipCmd.msoFlipVertical);
-                    float longeur = sr.Width;
-                    float hauteur = sr.Height;
+                   // MessageBox.Show("Finished");
+                    this.Close();
 
-                    int maxWidth = 1280;
-                    int maxHeight = 500;
+                    //Set myDocument = ActivePresentation.Slides(1)
+                    //With myDocument.Shapes
+                    //    .AddShape(msoShapeCan, 50, 10, 100, 200).Name = "shpOne"
+                    //    .AddShape(msoShapeCube, 150, 250, 100, 200).Name = "shpTwo"
+                    //    With.Range(Array("shpOne", "shpTwo")).Group
+                    //    End With
+                    //End With
 
-                    float coef = 0;
 
-                    if (longeur < hauteur)
-                    {
-                        c =  maxWidth / Convert.ToInt32(longeur);
-                        longeur = longeur * c;
-                        hauteur = hauteur * c;
-                    }else
-                    {
-                        c = maxHeight / Convert.ToInt32(hauteur);
-                        longeur = longeur * c;
-                        hauteur = hauteur * c;
-                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"An error occurred while creating the map, please send the log files in the folder 'C:\OCHA_logs' to the support mane2@un.org");
+                WriteLog("emf", " - Error Message : " + ex.Message);
+                WriteLog("emf", " - Error StackTrace : " + ex.StackTrace);
+                WriteLog("emf", " - Error TargetSite : " + ex.TargetSite);
+                WriteLog("emf", " - Error InnerException : " + ex.InnerException);
+                WriteLog("emf", " - Error ToString : " + ex.ToString());
+                WriteLog("emf", " - Error GetBaseException : " + ex.GetBaseException().ToString());
+                
+            }
+            finally
+            {
 
-                    sr.Width = longeur;
-                    sr.Height = hauteur;
+            }
+        }
+        
+
+        private void buttonCreate_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        public void WriteLog(String fichier, String message)
+        {
+            try
+            {
+                if (!Directory.Exists(@"C:\OCHA_logs"))
+                {
+                    Directory.CreateDirectory(@"C:\OCHA_logs");
                 }
 
-                MessageBox.Show("Finished");
-                this.Close();
-                
-                //Set myDocument = ActivePresentation.Slides(1)
-                //With myDocument.Shapes
-                //    .AddShape(msoShapeCan, 50, 10, 100, 200).Name = "shpOne"
-                //    .AddShape(msoShapeCube, 150, 250, 100, 200).Name = "shpTwo"
-                //    With.Range(Array("shpOne", "shpTwo")).Group
-                //    End With
-                //End With
 
+                String CheminFichier =  @"C:\OCHA_logs\" + fichier + " " + DateTime.Now.ToString("yyyy MM dd") + ".txt";
+                if (!System.IO.File.Exists(CheminFichier))
+                {
+                    System.IO.FileStream fichierLog = System.IO.File.Create(CheminFichier);
+                    fichierLog.Close();
+                }
+                File.AppendAllText(CheminFichier, DateTime.Now + " : " + message + "\r\n");
+               
+            }
+            catch (Exception ex)
+            {
 
             }
         }
 
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -246,6 +353,11 @@ namespace AddinPowerpointShapefileToEmf
             link.LinkData = "https://github.com/chamsocha/Shapefile-to-Emf/releases";
             e.Link.LinkData = link.LinkData;
             System.Diagnostics.Process.Start(e.Link.LinkData as string);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
